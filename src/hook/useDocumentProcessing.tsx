@@ -91,13 +91,11 @@ export const useDocumentProcessing = () => {
 
   const onShapeClick = useCallback((shape: CustomeAnnotationShape) => {
     const element = inputRefs.current[shape.id]
-
+    console.log('ele', element?.tagName)
     if (element) {
-      console.log('ele', element.tagName)
-      if (element.tagName === 'INPUT') {
+      if (element.tagName === 'TEXTAREA') {
         element.focus()
       } else if (element.tagName === 'DIV') {
-        console.log('its div')
         element.style.backgroundColor = shape.colorSet?.fill || 'blue'
       }
     }
@@ -109,7 +107,6 @@ export const useDocumentProcessing = () => {
     if (element) {
       console.log('ele', element.tagName)
       if (element.tagName === 'DIV') {
-        console.log('its div')
         element.style.backgroundColor = 'transparent'
       }
     }
