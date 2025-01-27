@@ -1,0 +1,18 @@
+{
+    "api_request": {
+        "error": {},
+        "resources": [
+            "job"
+        ],
+        "status": "success",
+        "status_code": 202,
+        "url": "https://api.mindee.net/v1/products/mindee/financial_document/v1/predict_async"
+    },
+    "job": {
+        "available_at": null,
+        "error": {},
+        "id": "84af4a09-b95d-47be-af5e-94a84ec75134",
+        "issued_at": "2025-01-24T21:30:00.436670",
+        "status": "waiting"
+    }
+}

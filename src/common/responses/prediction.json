@@ -1,0 +1,1005 @@
+{
+    "api_request": {
+        "error": {},
+        "resources": [
+            "document",
+            "job"
+        ],
+        "status": "success",
+        "status_code": 200,
+        "url": "https://api.mindee.net/v1/products/mindee/financial_document/v1/documents/2176e3b7-e783-4346-9ff9-3452f9a111ee"
+    },
+    "document": {
+        "id": "2176e3b7-e783-4346-9ff9-3452f9a111ee",
+        "inference": {
+            "extras": {},
+            "finished_at": "2025-01-24T21:30:02.418000",
+            "is_rotation_applied": true,
+            "pages": [
+                {
+                    "extras": {},
+                    "id": 0,
+                    "orientation": {
+                        "value": 0
+                    },
+                    "prediction": {
+                        "billing_address": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.05,
+                                    0.268
+                                ],
+                                [
+                                    0.217,
+                                    0.268
+                                ],
+                                [
+                                    0.217,
+                                    0.335
+                                ],
+                                [
+                                    0.05,
+                                    0.335
+                                ]
+                            ],
+                            "value": "2476 Blackwell Street Fairbanks 99701 Colorado U.S.A"
+                        },
+                        "category": {
+                            "confidence": 0.87,
+                            "value": "miscellaneous"
+                        },
+                        "customer_address": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.05,
+                                    0.377
+                                ],
+                                [
+                                    0.217,
+                                    0.377
+                                ],
+                                [
+                                    0.217,
+                                    0.445
+                                ],
+                                [
+                                    0.05,
+                                    0.445
+                                ]
+                            ],
+                            "value": "2476 Blackwell Street Fairbanks 99701 Colorado U.S.A"
+                        },
+                        "customer_company_registrations": [],
+                        "customer_id": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        },
+                        "customer_name": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.05,
+                                    0.247
+                                ],
+                                [
+                                    0.173,
+                                    0.247
+                                ],
+                                [
+                                    0.173,
+                                    0.263
+                                ],
+                                [
+                                    0.05,
+                                    0.263
+                                ]
+                            ],
+                            "raw_value": "Scott, Melba R",
+                            "value": "SCOTT, MELBA R"
+                        },
+                        "date": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.069,
+                                    0.508
+                                ],
+                                [
+                                    0.171,
+                                    0.508
+                                ],
+                                [
+                                    0.171,
+                                    0.525
+                                ],
+                                [
+                                    0.069,
+                                    0.525
+                                ]
+                            ],
+                            "value": "2024-08-05"
+                        },
+                        "document_number": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.837,
+                                    0.249
+                                ],
+                                [
+                                    0.966,
+                                    0.249
+                                ],
+                                [
+                                    0.966,
+                                    0.266
+                                ],
+                                [
+                                    0.837,
+                                    0.266
+                                ]
+                            ],
+                            "value": "INV-00002"
+                        },
+                        "document_type": {
+                            "value": "INVOICE"
+                        },
+                        "due_date": {
+                            "confidence": 0.99,
+                            "is_computed": true,
+                            "polygon": [
+                                [
+                                    0.401,
+                                    0.508
+                                ],
+                                [
+                                    0.401,
+                                    0.525
+                                ],
+                                [
+                                    0.486,
+                                    0.525
+                                ],
+                                [
+                                    0.486,
+                                    0.508
+                                ]
+                            ],
+                            "value": "2024-08-05"
+                        },
+                        "invoice_number": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.837,
+                                    0.249
+                                ],
+                                [
+                                    0.966,
+                                    0.249
+                                ],
+                                [
+                                    0.966,
+                                    0.266
+                                ],
+                                [
+                                    0.837,
+                                    0.266
+                                ]
+                            ],
+                            "value": "INV-00002"
+                        },
+                        "line_items": [
+                            {
+                                "confidence": 0.95,
+                                "description": "Pepe Jeans Tapered fit Mid rise - Blue Square",
+                                "polygon": [
+                                    [
+                                        0.131,
+                                        0.617
+                                    ],
+                                    [
+                                        0.947,
+                                        0.617
+                                    ],
+                                    [
+                                        0.947,
+                                        0.652
+                                    ],
+                                    [
+                                        0.131,
+                                        0.652
+                                    ]
+                                ],
+                                "product_code": null,
+                                "quantity": 1.0,
+                                "tax_amount": null,
+                                "tax_rate": null,
+                                "total_amount": 24.99,
+                                "unit_measure": "feet",
+                                "unit_price": 24.99
+                            },
+                            {
+                                "confidence": 0.95,
+                                "description": "Boys Shirt Size -36, Mosaic design",
+                                "polygon": [
+                                    [
+                                        0.13,
+                                        0.698
+                                    ],
+                                    [
+                                        0.947,
+                                        0.698
+                                    ],
+                                    [
+                                        0.947,
+                                        0.735
+                                    ],
+                                    [
+                                        0.13,
+                                        0.735
+                                    ]
+                                ],
+                                "product_code": null,
+                                "quantity": 1.0,
+                                "tax_amount": null,
+                                "tax_rate": null,
+                                "total_amount": 16.99,
+                                "unit_measure": "Piece",
+                                "unit_price": 16.99
+                            },
+                            {
+                                "confidence": 0.95,
+                                "description": "Men Shirt Size - 36,Mosaic design",
+                                "polygon": [
+                                    [
+                                        0.131,
+                                        0.781
+                                    ],
+                                    [
+                                        0.947,
+                                        0.781
+                                    ],
+                                    [
+                                        0.947,
+                                        0.817
+                                    ],
+                                    [
+                                        0.131,
+                                        0.817
+                                    ]
+                                ],
+                                "product_code": null,
+                                "quantity": 1.0,
+                                "tax_amount": null,
+                                "tax_rate": null,
+                                "total_amount": 19.99,
+                                "unit_measure": "Piece",
+                                "unit_price": 19.99
+                            }
+                        ],
+                        "locale": {
+                            "confidence": 0.87,
+                            "country": "US",
+                            "currency": "USD",
+                            "language": "en",
+                            "value": "en-US"
+                        },
+                        "orientation": {
+                            "confidence": 0.99,
+                            "degrees": 0
+                        },
+                        "payment_date": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.401,
+                                    0.508
+                                ],
+                                [
+                                    0.401,
+                                    0.525
+                                ],
+                                [
+                                    0.486,
+                                    0.525
+                                ],
+                                [
+                                    0.486,
+                                    0.508
+                                ]
+                            ],
+                            "value": "2024-08-05"
+                        },
+                        "po_number": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        },
+                        "receipt_number": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        },
+                        "reference_numbers": [],
+                        "shipping_address": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.05,
+                                    0.377
+                                ],
+                                [
+                                    0.217,
+                                    0.377
+                                ],
+                                [
+                                    0.217,
+                                    0.445
+                                ],
+                                [
+                                    0.05,
+                                    0.445
+                                ]
+                            ],
+                            "value": "2476 Blackwell Street Fairbanks 99701 Colorado U.S.A"
+                        },
+                        "subcategory": {
+                            "confidence": 0.0,
+                            "value": null
+                        },
+                        "supplier_address": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.758,
+                                    0.098
+                                ],
+                                [
+                                    0.965,
+                                    0.098
+                                ],
+                                [
+                                    0.965,
+                                    0.183
+                                ],
+                                [
+                                    0.758,
+                                    0.183
+                                ]
+                            ],
+                            "value": "14B, Northern Street Greater South Avenue New York 10001 U.S.A"
+                        },
+                        "supplier_company_registrations": [],
+                        "supplier_email": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        },
+                        "supplier_name": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.747,
+                                    0.071
+                                ],
+                                [
+                                    0.965,
+                                    0.071
+                                ],
+                                [
+                                    0.965,
+                                    0.09
+                                ],
+                                [
+                                    0.747,
+                                    0.09
+                                ]
+                            ],
+                            "raw_value": "Zylker Thread & Weave",
+                            "value": "ZYLKER THREAD & WEAVE"
+                        },
+                        "supplier_payment_details": [],
+                        "supplier_phone_number": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        },
+                        "supplier_website": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        },
+                        "taxes": [],
+                        "time": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        },
+                        "tip": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        },
+                        "total_amount": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.88,
+                                    0.951
+                                ],
+                                [
+                                    0.947,
+                                    0.951
+                                ],
+                                [
+                                    0.947,
+                                    0.972
+                                ],
+                                [
+                                    0.88,
+                                    0.972
+                                ]
+                            ],
+                            "value": 65.06
+                        },
+                        "total_net": {
+                            "confidence": 0.99,
+                            "polygon": [
+                                [
+                                    0.901,
+                                    0.845
+                                ],
+                                [
+                                    0.951,
+                                    0.845
+                                ],
+                                [
+                                    0.951,
+                                    0.864
+                                ],
+                                [
+                                    0.901,
+                                    0.864
+                                ]
+                            ],
+                            "value": 61.97
+                        },
+                        "total_tax": {
+                            "confidence": 0.0,
+                            "polygon": [],
+                            "value": null
+                        }
+                    }
+                }
+            ],
+            "prediction": {
+                "billing_address": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.05,
+                            0.268
+                        ],
+                        [
+                            0.217,
+                            0.268
+                        ],
+                        [
+                            0.217,
+                            0.335
+                        ],
+                        [
+                            0.05,
+                            0.335
+                        ]
+                    ],
+                    "value": "2476 Blackwell Street Fairbanks 99701 Colorado U.S.A"
+                },
+                "category": {
+                    "confidence": 0.87,
+                    "value": "miscellaneous"
+                },
+                "customer_address": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.05,
+                            0.377
+                        ],
+                        [
+                            0.217,
+                            0.377
+                        ],
+                        [
+                            0.217,
+                            0.445
+                        ],
+                        [
+                            0.05,
+                            0.445
+                        ]
+                    ],
+                    "value": "2476 Blackwell Street Fairbanks 99701 Colorado U.S.A"
+                },
+                "customer_company_registrations": [],
+                "customer_id": {
+                    "confidence": 0.0,
+                    "page_id": null,
+                    "polygon": [],
+                    "value": null
+                },
+                "customer_name": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.05,
+                            0.247
+                        ],
+                        [
+                            0.173,
+                            0.247
+                        ],
+                        [
+                            0.173,
+                            0.263
+                        ],
+                        [
+                            0.05,
+                            0.263
+                        ]
+                    ],
+                    "raw_value": "Scott, Melba R",
+                    "value": "SCOTT, MELBA R"
+                },
+                "date": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.069,
+                            0.508
+                        ],
+                        [
+                            0.171,
+                            0.508
+                        ],
+                        [
+                            0.171,
+                            0.525
+                        ],
+                        [
+                            0.069,
+                            0.525
+                        ]
+                    ],
+                    "value": "2024-08-05"
+                },
+                "document_number": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.837,
+                            0.249
+                        ],
+                        [
+                            0.966,
+                            0.249
+                        ],
+                        [
+                            0.966,
+                            0.266
+                        ],
+                        [
+                            0.837,
+                            0.266
+                        ]
+                    ],
+                    "value": "INV-00002"
+                },
+                "document_type": {
+                    "value": "INVOICE"
+                },
+                "due_date": {
+                    "confidence": 0.99,
+                    "is_computed": true,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.401,
+                            0.508
+                        ],
+                        [
+                            0.401,
+                            0.525
+                        ],
+                        [
+                            0.486,
+                            0.525
+                        ],
+                        [
+                            0.486,
+                            0.508
+                        ]
+                    ],
+                    "value": "2024-08-05"
+                },
+                "invoice_number": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.837,
+                            0.249
+                        ],
+                        [
+                            0.966,
+                            0.249
+                        ],
+                        [
+                            0.966,
+                            0.266
+                        ],
+                        [
+                            0.837,
+                            0.266
+                        ]
+                    ],
+                    "value": "INV-00002"
+                },
+                "line_items": [
+                    {
+                        "confidence": 0.95,
+                        "description": "Pepe Jeans Tapered fit Mid rise - Blue Square",
+                        "page_id": 0,
+                        "polygon": [
+                            [
+                                0.131,
+                                0.617
+                            ],
+                            [
+                                0.947,
+                                0.617
+                            ],
+                            [
+                                0.947,
+                                0.652
+                            ],
+                            [
+                                0.131,
+                                0.652
+                            ]
+                        ],
+                        "product_code": null,
+                        "quantity": 1.0,
+                        "tax_amount": null,
+                        "tax_rate": null,
+                        "total_amount": 24.99,
+                        "unit_measure": "feet",
+                        "unit_price": 24.99
+                    },
+                    {
+                        "confidence": 0.95,
+                        "description": "Boys Shirt Size -36, Mosaic design",
+                        "page_id": 0,
+                        "polygon": [
+                            [
+                                0.13,
+                                0.698
+                            ],
+                            [
+                                0.947,
+                                0.698
+                            ],
+                            [
+                                0.947,
+                                0.735
+                            ],
+                            [
+                                0.13,
+                                0.735
+                            ]
+                        ],
+                        "product_code": null,
+                        "quantity": 1.0,
+                        "tax_amount": null,
+                        "tax_rate": null,
+                        "total_amount": 16.99,
+                        "unit_measure": "Piece",
+                        "unit_price": 16.99
+                    },
+                    {
+                        "confidence": 0.95,
+                        "description": "Men Shirt Size - 36,Mosaic design",
+                        "page_id": 0,
+                        "polygon": [
+                            [
+                                0.131,
+                                0.781
+                            ],
+                            [
+                                0.947,
+                                0.781
+                            ],
+                            [
+                                0.947,
+                                0.817
+                            ],
+                            [
+                                0.131,
+                                0.817
+                            ]
+                        ],
+                        "product_code": null,
+                        "quantity": 1.0,
+                        "tax_amount": null,
+                        "tax_rate": null,
+                        "total_amount": 19.99,
+                        "unit_measure": "Piece",
+                        "unit_price": 19.99
+                    }
+                ],
+                "locale": {
+                    "confidence": 0.87,
+                    "country": "US",
+                    "currency": "USD",
+                    "language": "en",
+                    "value": "en-US"
+                },
+                "payment_date": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.401,
+                            0.508
+                        ],
+                        [
+                            0.401,
+                            0.525
+                        ],
+                        [
+                            0.486,
+                            0.525
+                        ],
+                        [
+                            0.486,
+                            0.508
+                        ]
+                    ],
+                    "value": "2024-08-05"
+                },
+                "po_number": {
+                    "confidence": 0.0,
+                    "page_id": null,
+                    "polygon": [],
+                    "value": null
+                },
+                "receipt_number": {
+                    "confidence": 0.0,
+                    "page_id": null,
+                    "polygon": [],
+                    "value": null
+                },
+                "reference_numbers": [],
+                "shipping_address": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.05,
+                            0.377
+                        ],
+                        [
+                            0.217,
+                            0.377
+                        ],
+                        [
+                            0.217,
+                            0.445
+                        ],
+                        [
+                            0.05,
+                            0.445
+                        ]
+                    ],
+                    "value": "2476 Blackwell Street Fairbanks 99701 Colorado U.S.A"
+                },
+                "subcategory": {
+                    "confidence": 0,
+                    "value": null
+                },
+                "supplier_address": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.758,
+                            0.098
+                        ],
+                        [
+                            0.965,
+                            0.098
+                        ],
+                        [
+                            0.965,
+                            0.183
+                        ],
+                        [
+                            0.758,
+                            0.183
+                        ]
+                    ],
+                    "value": "14B, Northern Street Greater South Avenue New York 10001 U.S.A"
+                },
+                "supplier_company_registrations": [],
+                "supplier_email": {
+                    "confidence": 0.0,
+                    "page_id": null,
+                    "polygon": [],
+                    "value": null
+                },
+                "supplier_name": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.747,
+                            0.071
+                        ],
+                        [
+                            0.965,
+                            0.071
+                        ],
+                        [
+                            0.965,
+                            0.09
+                        ],
+                        [
+                            0.747,
+                            0.09
+                        ]
+                    ],
+                    "raw_value": "Zylker Thread & Weave",
+                    "value": "ZYLKER THREAD & WEAVE"
+                },
+                "supplier_payment_details": [],
+                "supplier_phone_number": {
+                    "confidence": 0.0,
+                    "page_id": null,
+                    "polygon": [],
+                    "value": null
+                },
+                "supplier_website": {
+                    "confidence": 0.0,
+                    "page_id": null,
+                    "polygon": [],
+                    "value": null
+                },
+                "taxes": [],
+                "time": {
+                    "confidence": 0.0,
+                    "page_id": null,
+                    "polygon": [],
+                    "value": null
+                },
+                "tip": {
+                    "confidence": 0.0,
+                    "page_id": null,
+                    "polygon": [],
+                    "value": null
+                },
+                "total_amount": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.88,
+                            0.951
+                        ],
+                        [
+                            0.947,
+                            0.951
+                        ],
+                        [
+                            0.947,
+                            0.972
+                        ],
+                        [
+                            0.88,
+                            0.972
+                        ]
+                    ],
+                    "value": 65.06
+                },
+                "total_net": {
+                    "confidence": 0.99,
+                    "page_id": 0,
+                    "polygon": [
+                        [
+                            0.901,
+                            0.845
+                        ],
+                        [
+                            0.951,
+                            0.845
+                        ],
+                        [
+                            0.951,
+                            0.864
+                        ],
+                        [
+                            0.901,
+                            0.864
+                        ]
+                    ],
+                    "value": 61.97
+                },
+                "total_tax": {
+                    "confidence": 0.0,
+                    "page_id": 0,
+                    "polygon": [],
+                    "value": null
+                }
+            },
+            "processing_time": 0.701103925704956,
+            "product": {
+                "features": [
+                    "locale",
+                    "invoice_number",
+                    "po_number",
+                    "receipt_number",
+                    "document_number",
+                    "reference_numbers",
+                    "date",
+                    "due_date",
+                    "payment_date",
+                    "total_net",
+                    "total_amount",
+                    "taxes",
+                    "supplier_payment_details",
+                    "supplier_name",
+                    "supplier_company_registrations",
+                    "supplier_address",
+                    "supplier_phone_number",
+                    "customer_name",
+                    "supplier_website",
+                    "supplier_email",
+                    "customer_company_registrations",
+                    "customer_address",
+                    "customer_id",
+                    "shipping_address",
+                    "billing_address",
+                    "document_type",
+                    "orientation",
+                    "subcategory",
+                    "category",
+                    "total_tax",
+                    "tip",
+                    "time",
+                    "line_items"
+                ],
+                "name": "mindee/financial_document",
+                "type": "standard",
+                "version": "1.11"
+            },
+            "started_at": "2025-01-24T21:30:00.436000"
+        },
+        "n_pages": 1,
+        "name": "invoice-092.png"
+    },
+    "job": {
+        "available_at": "2025-01-24T21:30:02.433000",
+        "error": {},
+        "id": "84af4a09-b95d-47be-af5e-94a84ec75134",
+        "issued_at": "2025-01-24T21:30:00.436000",
+        "status": "completed"
+    }
+}
