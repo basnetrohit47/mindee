@@ -44,7 +44,7 @@ export const LineItemTextField = ({
         FormHelperTextProps={{
           sx: { textAlign: 'right', width: '97%' }, // Styles for the helper text
         }}
-        helperText={`Confidence Score: ${field.confidence}`}
+        helperText={`Confidence Score: ${field.raw.confidence}`}
         key={field.id}
         sx={{
           width: '80%',
