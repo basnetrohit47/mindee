@@ -1,5 +1,11 @@
 # Exercise - Frontend Software Engineer
 
+## Exercise Note
+
+- **Technical Choice**: Highlighted the usage of **Zod** for validation and type safety.
+
+- **Further Improvements**: Listed the improvements related to **Test Coverage**, **State Management Optimization**, and **UI Enhancements**.
+
 ## Installation
 
 1. Install the dependencies
