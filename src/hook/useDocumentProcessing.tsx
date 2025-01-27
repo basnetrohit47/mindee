@@ -89,24 +89,16 @@ export const useDocumentProcessing = () => {
     setShapes((prevShapes) => createUpdatedShapes(prevShapes))
   }, [])
 
-  // Shape Hover Handler
-  //   const onShapeClick = useCallback((shape: CustomeAnnotationShape) => {
-  //     const inputElement = inputRefs.current[shape.id]
-  //     inputElement?.focus()
-  //   }, [])
   const onShapeClick = useCallback((shape: CustomeAnnotationShape) => {
     const element = inputRefs.current[shape.id]
 
     if (element) {
       console.log('ele', element.tagName)
-      // Check the tag name to differentiate between input and div
       if (element.tagName === 'INPUT') {
-        // If it's an input, focus on it
         element.focus()
       } else if (element.tagName === 'DIV') {
         console.log('its div')
-        // If it's a div, apply a different effect
-        element.style.backgroundColor = shape.colorSet?.fill || 'blue' // Just an example, change as needed
+        element.style.backgroundColor = shape.colorSet?.fill || 'blue'
       }
     }
   }, [])
@@ -116,11 +108,9 @@ export const useDocumentProcessing = () => {
 
     if (element) {
       console.log('ele', element.tagName)
-      // Check the tag name to differentiate between input and div
       if (element.tagName === 'DIV') {
         console.log('its div')
-        // If it's a div, apply a different effect
-        element.style.backgroundColor = 'transparent' // Just an example, change as needed
+        element.style.backgroundColor = 'transparent'
       }
     }
   }, [])
