@@ -25,6 +25,7 @@ const DocumentView = () => {
     predictionResponse,
     handleFieldChange,
     predictionStatus,
+    onShapeLave,
   } = useDocumentProcessing()
   const [tabValue, setTabValue] = useState(0)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -57,6 +58,7 @@ const DocumentView = () => {
               documentUploadSuccess={documentUploadSuccess}
               onClickUpload={handleDocumentUpload}
               onClickPredict={getPrediction}
+              onShapeLave={onShapeLave}
             />
           </Box>
           <Box
@@ -78,7 +80,7 @@ const DocumentView = () => {
                   <Tab label="Extracted data" />
                   <Tab
                     sx={{ textTransform: 'none' }}
-                    label={`API RESPONSE (${predictionResponse?.document.inference.processing_time?.toFixed(2)} s)`}
+                    label={`API RESPONSE (${predictionResponse?.document?.inference.processing_time?.toFixed(2)} s)`}
                   />
                 </Tabs>
                 {tabValue === 0 && (
@@ -92,7 +94,7 @@ const DocumentView = () => {
                 )}
                 {tabValue === 1 && (
                   <PredictionResponse
-                    predictionResponse={predictionResponse?.document.inference}
+                    predictionResponse={predictionResponse?.document?.inference}
                   />
                 )}
               </>

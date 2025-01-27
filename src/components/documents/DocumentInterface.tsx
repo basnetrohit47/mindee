@@ -6,6 +6,7 @@ import AnnotationPlaceholder from './AnnotationPlaceholder'
 
 type DocumentInterfaceProps = {
   onShapeClick: (shape: AnnotationShape) => void
+  onShapeLave: (shape: AnnotationShape) => void
   document: File | null
   onClickUpload: (file: File) => void
   onClickPredict: () => void
@@ -20,6 +21,7 @@ export default function DocumentInterface({
   onShapeClick,
   shapes = [],
   documentUploadSuccess,
+  onShapeLave,
 }: DocumentInterfaceProps) {
   return (
     <Stack sx={{ height: '100%' }}>
@@ -37,6 +39,7 @@ export default function DocumentInterface({
               {document ? (
                 <AnnotationViewer
                   onShapeMouseEnter={onShapeClick}
+                  onShapeMouseLeave={onShapeLave}
                   data={{
                     image: URL.createObjectURL(document),
                     shapes: shapes,

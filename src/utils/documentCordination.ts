@@ -21,6 +21,7 @@ export const getDocumentPrediction = (
                     value: `Product Code: ${item.description}\n Quantity : ${item.quantity}\n Measure: ${item.unit_measure}\nRate : ${item.unit_price}\nTax amount : ${item.tax_amount}\nTotal : ${item.total_amount} `,
                     colorSet: colorSet,
                     config: { stroke: colorSet.stroke },
+                    raw: item,
                 })
             })
         } else {
@@ -34,6 +35,7 @@ export const getDocumentPrediction = (
                 confidence: prediction[key]?.confidence || 0,
                 colorSet: colorSet,
                 config: { stroke: colorSet.stroke },
+                raw: prediction[key],
             })
         }
 

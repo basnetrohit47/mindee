@@ -46,7 +46,7 @@ export const ChangeReview = ({ handleClose, changeLog }: Props) => {
                         marginBottom: '0.2rem',
                       }}
                     >
-                      {item.name}
+                      {item.name} ({item.ChangedlistName})
                     </Typography>
                     <Box display={'flex'} gap={2}>
                       <Typography sx={{ color: '#367c36' }}>
@@ -58,7 +58,9 @@ export const ChangeReview = ({ handleClose, changeLog }: Props) => {
                           textDecoration: 'line-through',
                         }}
                       >
-                        {item.original}
+                        {item.isList
+                          ? item.raw[item.ChangedlistName]
+                          : item.original}
                       </Typography>
                     </Box>
                   </Box>

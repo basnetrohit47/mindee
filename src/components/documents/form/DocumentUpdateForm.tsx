@@ -9,8 +9,14 @@ interface Props {
   DocumentFields: CustomeAnnotationShape[]
   handleMouseLeave: () => void
   handleMouseHover: (field: CustomeAnnotationShape) => void
-  handleFieldChange: (field: CustomeAnnotationShape, newValue: string) => void
-  inputRefs: React.MutableRefObject<{ [key: number]: HTMLInputElement | null }>
+  handleFieldChange: (
+    field: CustomeAnnotationShape,
+    newValue: string,
+    listName?: string,
+  ) => void
+  inputRefs: React.MutableRefObject<{
+    [key: number]: HTMLInputElement | HTMLDivElement | null
+  }>
 }
 const DocumentUpdateForm = ({
   DocumentFields,

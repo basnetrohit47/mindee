@@ -16,7 +16,7 @@ export const PredictionResponseSchema = z.object({
 
         })
 
-    }).passthrough()
+    }).passthrough().nullable().optional()
 })
 
 export type PredictionModal = z.infer<typeof PredictionResponseSchema>
