@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useAtom } from 'jotai'
 
 import { CustomeAnnotationShape } from '../../common/types'
@@ -68,12 +68,16 @@ const DocumentView = () => {
               paddingTop: '1rem',
             }}
           >
-            {getDocumentResponse && (
+            {getDocumentResponse ? (
               <PredictionInterface
                 jobId={getDocumentResponse.job.id}
                 inputRefs={inputRefs}
                 handleFieldHover={handleFieldHover}
               />
+            ) : (
+              <Box display={'flex'} alignItems={'center'} height={'100%'}>
+                <Typography>Your extracted data will display here</Typography>
+              </Box>
             )}
           </Box>
         </Box>
