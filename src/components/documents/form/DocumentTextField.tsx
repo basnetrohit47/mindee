@@ -87,6 +87,9 @@ export const DocumentTextField = ({ field }: Props) => {
           label={field.name}
           multiline
           onChange={(e) => setValue(e.target.value)}
+          // inputRef={(el) => {
+          //   inputRefs.current[field.id] = el
+          // }}
           // inputRef={(el) => el && addRef(1, el)} // Store the reference to the input element in the atom
         />
       )}

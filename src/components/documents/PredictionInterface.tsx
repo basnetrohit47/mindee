@@ -14,6 +14,7 @@ import { PredictionStatus } from './status/PredictionStatus'
 
 interface Props {
   jobId: string
+  inputRefs:
 }
 export const PredictionInterface = ({ jobId }: Props) => {
   const {
