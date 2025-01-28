@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Box, Button } from '@mui/material'
 
 import { CustomeAnnotationShape } from '../../../common/types'
@@ -7,24 +7,8 @@ import { DocumentTextField } from './DocumentTextField'
 
 interface Props {
   DocumentFields: CustomeAnnotationShape[]
-  handleMouseLeave: () => void
-  handleMouseHover: (field: CustomeAnnotationShape) => void
-  handleFieldChange: (
-    field: CustomeAnnotationShape,
-    newValue: string,
-    listName?: string,
-  ) => void
-  inputRefs: React.MutableRefObject<{
-    [key: number]: HTMLInputElement | HTMLDivElement | null
-  }>
 }
-const DocumentUpdateForm = ({
-  DocumentFields,
-  handleMouseLeave,
-  handleMouseHover,
-  handleFieldChange,
-  inputRefs,
-}: Props) => {
+const DocumentUpdateForm = ({ DocumentFields }: Props) => {
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
   const showReview = () => {
@@ -47,14 +31,7 @@ const DocumentUpdateForm = ({
         </Box>
         <Box sx={{ height: '60vh', overflow: 'scroll', paddingTop: '1rem' }}>
           {DocumentFields.map((field: CustomeAnnotationShape) => (
-            <DocumentTextField
-              key={field.id}
-              field={field}
-              handleMouseHover={handleMouseHover}
-              handleMouseLeave={handleMouseLeave}
-              inputRefs={inputRefs}
-              handleFieldChange={handleFieldChange}
-            />
+            <DocumentTextField key={field.id} field={field} />
           ))}
         </Box>
         {open && (

@@ -1,43 +1,51 @@
-import React, { useState } from 'react'
-import { Tab, Tabs } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Tab, Tabs, Typography } from '@mui/material'
+import { useAtom } from 'jotai'
 
-import { CustomeAnnotationShape } from '../../common/types'
-import { PredictionModal } from '../../core/entities/models/prediction.model'
+import { useGetPredictions } from '../../hook/useGetPrediction'
+import {
+  predictionFields,
+  predictionShapes,
+} from '../../store/prediction.store'
+import { getDocumentPrediction } from '../../utils/documentCordination'
 import DocumentUpdateForm from './form/DocumentUpdateForm'
 import { PredictionResponse } from './form/PredictionResponse'
 import { PredictionStatus } from './status/PredictionStatus'
 
 interface Props {
-  predictionResponse: PredictionModal | null | undefined
-  predictionStatus: 'idle' | 'pending' | 'error' | 'success'
-  predictionError: Error | null
-  DocumentFields: CustomeAnnotationShape[]
-  handleMouseLeave: () => void
-  handleMouseHover: (field: CustomeAnnotationShape) => void
-  handleFieldChange: (
-    field: CustomeAnnotationShape,
-    newValue: string,
-    listName?: string,
-  ) => void
-
-  inputRefs: React.MutableRefObject<{
-    [key: number]: HTMLInputElement | HTMLDivElement | null
-  }>
+  jobId: string
 }
-export const PredictionInterface = ({
-  DocumentFields,
-  handleMouseLeave,
-  handleMouseHover,
-  handleFieldChange,
-  inputRefs,
-  predictionStatus,
-  predictionResponse,
-  predictionError,
-}: Props) => {
+export const PredictionInterface = ({ jobId }: Props) => {
+  const {
+    data: predictionResponse,
+    error: predictionError,
+    isSuccess: predictionSuccess,
+    status: predictionStatus,
+  } = useGetPredictions(jobId)
+
+  const [, setPredictionShape] = useAtom(predictionShapes)
+  const [DocumentFields, setPredictionField] = useAtom(predictionFields)
+
+  useEffect(() => {
+    if (predictionSuccess && predictionResponse) {
+      const shapes = getDocumentPrediction(
+        predictionResponse.document?.inference.prediction,
+      )
+      setPredictionShape(shapes)
+      setPredictionField(JSON.parse(JSON.stringify(shapes))) // Deep clone using JSON methods
+    }
+  }, [
+    predictionResponse,
+    predictionSuccess,
+    setPredictionShape,
+    setPredictionField,
+  ])
+
   const [tabValue, setTabValue] = useState(0)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue)
   }
+
   return (
     <>
       {DocumentFields.length ? (
@@ -50,13 +58,7 @@ export const PredictionInterface = ({
             />
           </Tabs>
           {tabValue === 0 && (
-            <DocumentUpdateForm
-              DocumentFields={DocumentFields}
-              handleMouseHover={handleMouseHover}
-              handleMouseLeave={handleMouseLeave}
-              inputRefs={inputRefs}
-              handleFieldChange={handleFieldChange}
-            />
+            <DocumentUpdateForm DocumentFields={DocumentFields} />
           )}
           {tabValue === 1 && (
             <PredictionResponse

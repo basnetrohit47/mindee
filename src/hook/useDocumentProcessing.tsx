@@ -65,6 +65,7 @@ export const useDocumentProcessing = () => {
   // Prediction Response Update
   useEffect(() => {
     if (predictionResponse) {
+      console.log('prediction response')
       const shapes = getDocumentPrediction(
         predictionResponse.document?.inference.prediction,
       )
@@ -102,7 +103,6 @@ export const useDocumentProcessing = () => {
 
   const onShapeLave = useCallback((shape: CustomeAnnotationShape) => {
     const element = inputRefs.current[shape.id]
-
     if (element) {
       console.log('ele', element.tagName)
       if (element.tagName === 'DIV') {

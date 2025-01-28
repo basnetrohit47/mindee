@@ -1,39 +1,16 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import { useAtom } from 'jotai'
 
-import { useDocumentProcessing } from '../../hook/useDocumentProcessing'
+import { documentResponse } from '../../store/document.store'
 import DocumentInterface from './DocumentInterface'
 import { PredictionInterface } from './PredictionInterface'
-import { DocumentStatus } from './status/DocumentStatus'
 
 const DocumentView = () => {
-  const {
-    document,
-    shapes,
-    inputRefs,
-    handleDocumentUpload,
-    getPrediction,
-    handleFieldHover,
-    handleMouseLeave,
-    onShapeClick,
-    documentUploadSuccess,
-    documentError,
-    documentStatus,
-    predictionError,
-    predictionResponse,
-    handleFieldChange,
-    predictionStatus,
-    onShapeLave,
-    fields,
-  } = useDocumentProcessing()
+  const [getDocumentResponse] = useAtom(documentResponse)
 
   return (
     <>
       <Box sx={{ height: '80vh', margin: '1rem', maxWidth: '100%' }}>
-        <DocumentStatus
-          documentStatus={documentStatus}
-          documentError={documentError}
-        />
-
         <Box
           display="flex"
           sx={{ width: '100%', height: '80vh' }}
@@ -46,15 +23,7 @@ const DocumentView = () => {
               width: '50%',
             }}
           >
-            <DocumentInterface
-              onShapeClick={onShapeClick}
-              document={document}
-              shapes={shapes}
-              documentUploadSuccess={documentUploadSuccess}
-              onClickUpload={handleDocumentUpload}
-              onClickPredict={getPrediction}
-              onShapeLave={onShapeLave}
-            />
+            <DocumentInterface />
           </Box>
           <Box
             display="flex"
@@ -69,16 +38,10 @@ const DocumentView = () => {
               paddingTop: '1rem',
             }}
           >
-            <PredictionInterface
-              DocumentFields={fields}
-              handleMouseHover={handleFieldHover}
-              inputRefs={inputRefs}
-              handleMouseLeave={handleMouseLeave}
-              handleFieldChange={handleFieldChange}
-              predictionResponse={predictionResponse}
-              predictionStatus={predictionStatus}
-              predictionError={predictionError}
-            />
+            <Typography>jobid:{getDocumentResponse?.job.id}</Typography>
+            {getDocumentResponse && (
+              <PredictionInterface jobId={getDocumentResponse.job.id} />
+            )}
           </Box>
         </Box>
       </Box>
