@@ -23,13 +23,7 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
   const [getPredictionShape, setPredictionShape] = useAtom(predictionShapes)
   const [, setPredictionField] = useAtom(predictionFields)
   const [canPrediction, setCanPrediction] = useState<boolean>(false)
-
-  const {
-    mutateAsync: uploadDocument,
-    data: documentUploadResponse,
-    status: documentUploadStatus,
-    error: documentUploadError,
-  } = useAddDocument()
+  const { mutateAsync: uploadDocument, data, status, error } = useAddDocument()
 
   useEffect(() => {
     if (document) {
@@ -38,7 +32,7 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
   }, [document, uploadDocument])
 
   useEffect(() => {
-    if (documentUploadStatus === 'success') {
+    if (status === 'success') {
       setCanPrediction(true)
     } else {
       setCanPrediction(false)
@@ -46,26 +40,22 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
       setPredictionField([])
       setDocumentUploadResponse(undefined)
     }
-  }, [documentUploadStatus])
+  }, [status])
 
   const handleDocumentUpload = (file: File) => {
     setDocument(file)
-    // uploadDocument(file)
   }
 
   const handleGetPrediction = () => {
     if (canPrediction) {
-      setDocumentUploadResponse(documentUploadResponse)
+      setDocumentUploadResponse(data)
     }
   }
   console.log('document interface re-render')
 
   return (
     <Box sx={{ height: '100%' }}>
-      <DocumentStatus
-        documentStatus={documentUploadStatus}
-        documentError={documentUploadError}
-      />
+      <DocumentStatus documentStatus={status} documentError={error} />
       <Stack sx={{ height: '100%' }}>
         <Dropzone
           onDrop={(files) => handleDocumentUpload(files[0])}

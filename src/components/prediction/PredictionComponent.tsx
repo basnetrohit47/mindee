@@ -21,30 +21,18 @@ interface Props {
   }>
 }
 export const PredictionComponent = ({ jobId, inputRefs }: Props) => {
-  const {
-    data: predictionResponse,
-    error: predictionError,
-    isSuccess: predictionSuccess,
-    status: predictionStatus,
-  } = useGetPredictions(jobId)
+  const { data, error, isSuccess, status } = useGetPredictions(jobId)
 
   const [, setPredictionShape] = useAtom(predictionShapes)
   const [DocumentFields, setPredictionField] = useAtom(predictionFields)
 
   useEffect(() => {
-    if (predictionSuccess && predictionResponse) {
-      const shapes = getDocumentPrediction(
-        predictionResponse.document?.inference.prediction,
-      )
+    if (isSuccess && data) {
+      const shapes = getDocumentPrediction(data.document?.inference.prediction)
       setPredictionShape(shapes)
       setPredictionField(JSON.parse(JSON.stringify(shapes))) // Deep clone using JSON methods
     }
-  }, [
-    predictionResponse,
-    predictionSuccess,
-    setPredictionShape,
-    setPredictionField,
-  ])
+  }, [data, isSuccess, setPredictionShape, setPredictionField])
 
   const [tabValue, setTabValue] = useState(0)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -68,7 +56,7 @@ export const PredictionComponent = ({ jobId, inputRefs }: Props) => {
             <Tab label="Extracted data" />
             <Tab
               sx={{ textTransform: 'none' }}
-              label={`API RESPONSE (${predictionResponse?.document?.inference.processing_time?.toFixed(2)} s)`}
+              label={`API RESPONSE (${data?.document?.inference.processing_time?.toFixed(2)} s)`}
             />
           </Tabs>
           {tabValue === 0 && (
@@ -79,15 +67,12 @@ export const PredictionComponent = ({ jobId, inputRefs }: Props) => {
           )}
           {tabValue === 1 && (
             <PredictionResponse
-              predictionResponse={predictionResponse?.document?.inference}
+              predictionResponse={data?.document?.inference}
             />
           )}
         </>
       ) : (
-        <PredictionStatus
-          predictionStatus={predictionStatus}
-          predictionError={predictionError}
-        />
+        <PredictionStatus predictionStatus={status} predictionError={error} />
       )}
     </>
   )
