@@ -21,7 +21,7 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
   const [document, setDocument] = useState<File | null>(null)
   const [, setDocumentUploadResponse] = useAtom(documentResponse)
   const [getPredictionShape, setPredictionShape] = useAtom(predictionShapes)
-  // const [, setPredictionField] = useAtom(predictionFields)
+  const [, setPredictionField] = useAtom(predictionFields)
   const [canPrediction, setCanPrediction] = useState<boolean>(false)
 
   const {
@@ -43,7 +43,7 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
     } else {
       setCanPrediction(false)
       setPredictionShape([])
-      // setPredictionField([])
+      setPredictionField([])
       setDocumentUploadResponse(undefined)
     }
   }, [documentUploadStatus])
