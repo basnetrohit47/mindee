@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
-import { useAtom } from 'jotai'
 
 import { CustomeAnnotationShape } from '../../../common/types'
 import { useDebounce } from '../../../hook/useDebounce'
-import { inputRefsAtom } from '../../../store/prediction.store'
 import { LineItemTextField } from './LineItemTextField'
 
 interface Props {
   field: CustomeAnnotationShape
+  handleFieldHover: (shape: CustomeAnnotationShape) => void
+
+  inputRefs: React.MutableRefObject<{
+    [key: number]: HTMLInputElement | HTMLDivElement | null
+  }>
 }
 
-export const DocumentTextField = ({ field }: Props) => {
+export const DocumentTextField = ({
+  field,
+  inputRefs,
+  handleFieldHover,
+}: Props) => {
   const [value, setValue] = useState(field.value)
   const debouncedValue = useDebounce(value)
 
@@ -20,12 +27,6 @@ export const DocumentTextField = ({ field }: Props) => {
       // handleFieldChange(field, value)
     }
   }, [debouncedValue])
-  const [, setInputRefs] = useAtom(inputRefsAtom)
-
-  const addRef = (key: number, element: HTMLInputElement | HTMLDivElement) => {
-    // Update the ref in the atom
-    setInputRefs((prevRefs) => ({ ...prevRefs, [key]: element }))
-  }
 
   return (
     <Box
@@ -43,16 +44,19 @@ export const DocumentTextField = ({ field }: Props) => {
             <div style={{ padding: '1rem 0rem' }}>
               <LineItemTextField
                 field={field}
+                inputRefs={inputRefs}
                 itemName="description"
                 itemValue={field.raw.description}
               />
               <LineItemTextField
                 field={field}
+                inputRefs={inputRefs}
                 itemName="quantity"
                 itemValue={field.raw.quantity}
               />
               <LineItemTextField
                 field={field}
+                inputRefs={inputRefs}
                 itemName="unit_price"
                 itemValue={field.raw.unit_price}
               />
@@ -86,10 +90,11 @@ export const DocumentTextField = ({ field }: Props) => {
           value={value}
           label={field.name}
           multiline
+          onMouseOver={handleFieldHover}
           onChange={(e) => setValue(e.target.value)}
-          // inputRef={(el) => {
-          //   inputRefs.current[field.id] = el
-          // }}
+          inputRef={(el) => {
+            inputRefs.current[field.id] = el
+          }}
           // inputRef={(el) => el && addRef(1, el)} // Store the reference to the input element in the atom
         />
       )}

@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
 import { Box, TextField } from '@mui/material'
-import { useAtom } from 'jotai'
 
 import { CustomeAnnotationShape } from '../../../common/types'
 import { useDebounce } from '../../../hook/useDebounce'
-import { inputRefsAtom } from '../../../store/prediction.store'
 
 interface Props {
   itemName: string
   itemValue: string
   field: CustomeAnnotationShape
+  inputRefs: React.MutableRefObject<{
+    [key: number]: HTMLInputElement | HTMLDivElement | null
+  }>
 }
 
 export const LineItemTextField = ({
   field,
-
+  inputRefs,
   itemName,
   itemValue,
 }: Props) => {
@@ -26,13 +27,6 @@ export const LineItemTextField = ({
       // handleFieldChange(field, value, itemName)
     }
   }, [debouncedValue])
-
-  const [, setInputRefs] = useAtom(inputRefsAtom)
-
-  const addRef = (key: number, element: HTMLInputElement | HTMLDivElement) => {
-    // Update the ref in the atom
-    setInputRefs((prevRefs) => ({ ...prevRefs, [key]: element }))
-  }
 
   return (
     <Box width={'100%'}>
@@ -63,6 +57,9 @@ export const LineItemTextField = ({
         label={itemName}
         multiline
         onChange={(e) => setValue(e.target.value)}
+        inputRef={(el) => {
+          inputRefs.current[field.id] = el
+        }}
         // inputRef={(el) => el && addRef(1, el)} // Store the reference to the input element in the atom
       />
     </Box>

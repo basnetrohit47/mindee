@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Tab, Tabs, Typography } from '@mui/material'
+import { Tab, Tabs } from '@mui/material'
 import { useAtom } from 'jotai'
 
+import { CustomeAnnotationShape } from '../../common/types'
 import { useGetPredictions } from '../../hook/useGetPrediction'
 import {
   predictionFields,
@@ -14,9 +15,16 @@ import { PredictionStatus } from './status/PredictionStatus'
 
 interface Props {
   jobId: string
-  inputRefs:
+  inputRefs: React.MutableRefObject<{
+    [key: number]: HTMLInputElement | HTMLDivElement | null
+  }>
+  handleFieldHover: (shape: CustomeAnnotationShape) => void
 }
-export const PredictionInterface = ({ jobId }: Props) => {
+export const PredictionInterface = ({
+  jobId,
+  inputRefs,
+  handleFieldHover,
+}: Props) => {
   const {
     data: predictionResponse,
     error: predictionError,
@@ -59,7 +67,11 @@ export const PredictionInterface = ({ jobId }: Props) => {
             />
           </Tabs>
           {tabValue === 0 && (
-            <DocumentUpdateForm DocumentFields={DocumentFields} />
+            <DocumentUpdateForm
+              handleFieldHover={handleFieldHover}
+              DocumentFields={DocumentFields}
+              inputRefs={inputRefs}
+            />
           )}
           {tabValue === 1 && (
             <PredictionResponse

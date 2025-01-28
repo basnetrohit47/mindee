@@ -4,12 +4,16 @@ import { useAtom } from 'jotai'
 import Dropzone from 'react-dropzone'
 import { AnnotationViewer } from 'react-mindee-js'
 
+import { CustomeAnnotationShape } from '../../common/types'
 import { useAddDocument } from '../../hook/useAddDocument'
 import { documentResponse } from '../../store/document.store'
 import { predictionShapes } from '../../store/prediction.store'
 import AnnotationPlaceholder from './AnnotationPlaceholder'
 
-const DocumentInterface = React.memo(() => {
+interface Props {
+  onShapeHover: (shape: CustomeAnnotationShape) => void
+}
+const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
   const [document, setDocument] = useState<File | null>(null)
   const [, setDocumentUploadResponse] = useAtom(documentResponse)
   const [getPredictionShape] = useAtom(predictionShapes)
@@ -53,7 +57,7 @@ const DocumentInterface = React.memo(() => {
             >
               {document ? (
                 <AnnotationViewer
-                  // onShapeMouseEnter={onShapeClick}
+                  onShapeMouseEnter={onShapeHover}
                   // onShapeMouseLeave={onShapeLave}
                   data={{
                     image: URL.createObjectURL(document),

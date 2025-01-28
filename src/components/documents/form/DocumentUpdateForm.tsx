@@ -7,8 +7,11 @@ import { DocumentTextField } from './DocumentTextField'
 
 interface Props {
   DocumentFields: CustomeAnnotationShape[]
+  inputRefs: React.MutableRefObject<{
+    [key: number]: HTMLInputElement | HTMLDivElement | null
+  }>
 }
-const DocumentUpdateForm = ({ DocumentFields }: Props) => {
+const DocumentUpdateForm = ({ DocumentFields, inputRefs }: Props) => {
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
   const showReview = () => {
@@ -31,7 +34,11 @@ const DocumentUpdateForm = ({ DocumentFields }: Props) => {
         </Box>
         <Box sx={{ height: '60vh', overflow: 'scroll', paddingTop: '1rem' }}>
           {DocumentFields.map((field: CustomeAnnotationShape) => (
-            <DocumentTextField key={field.id} field={field} />
+            <DocumentTextField
+              key={field.id}
+              field={field}
+              inputRefs={inputRefs}
+            />
           ))}
         </Box>
         {open && (
