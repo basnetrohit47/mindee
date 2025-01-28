@@ -7,8 +7,6 @@ interface Props {
 }
 export const PredictionStatus = React.memo(
   ({ predictionStatus, predictionError }: Props) => {
-    console.log('prediction re-rendered')
-
     return (
       <Box display={'flex'} alignItems={'center'} height={'100%'}>
         {predictionStatus === 'pending' && (

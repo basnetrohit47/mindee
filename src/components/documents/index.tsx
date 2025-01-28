@@ -12,7 +12,6 @@ const DocumentView = () => {
 
   const onShapeHover = useCallback((shape: CustomeAnnotationShape) => {
     const element = inputRefs.current[shape.id]
-    console.log('ele', element?.tagName)
     if (element) {
       if (element.tagName === 'TEXTAREA') {
         element.focus()
@@ -22,7 +21,6 @@ const DocumentView = () => {
     }
   }, [])
 
-  console.log('main index redering')
   return (
     <>
       <Box sx={{ height: '80vh', margin: '1rem', maxWidth: '100%' }}>

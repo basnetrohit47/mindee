@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, Stack } from '@mui/material'
 import { useAtom } from 'jotai'
 import Dropzone from 'react-dropzone'
@@ -7,7 +7,10 @@ import { AnnotationViewer } from 'react-mindee-js'
 import { CustomeAnnotationShape } from '../../common/types'
 import { useAddDocument } from '../../hook/useAddDocument'
 import { documentResponse } from '../../store/document.store'
-import { predictionShapes } from '../../store/prediction.store'
+import {
+  predictionFields,
+  predictionShapes,
+} from '../../store/prediction.store'
 import AnnotationPlaceholder from './AnnotationPlaceholder'
 import { DocumentStatus } from './DocumentStatus'
 
@@ -18,37 +21,45 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
   const [document, setDocument] = useState<File | null>(null)
   const [, setDocumentUploadResponse] = useAtom(documentResponse)
   const [getPredictionShape, setPredictionShape] = useAtom(predictionShapes)
+  // const [, setPredictionField] = useAtom(predictionFields)
+  const [canPrediction, setCanPrediction] = useState<boolean>(false)
 
   const {
-    mutate: uploadDocument,
+    mutateAsync: uploadDocument,
     data: documentUploadResponse,
     status: documentUploadStatus,
     error: documentUploadError,
-    isSuccess: documentUploadSuccess,
   } = useAddDocument()
 
-  const handleDocumentUpload = useCallback(
-    (file: File) => {
-      setDocument(file)
-      setDocumentUploadResponse(undefined)
+  useEffect(() => {
+    if (document) {
+      uploadDocument(document)
+    }
+  }, [document, uploadDocument])
+
+  useEffect(() => {
+    if (documentUploadStatus === 'success') {
+      setCanPrediction(true)
+    } else {
+      setCanPrediction(false)
       setPredictionShape([])
-      uploadDocument(file)
-    },
-    [
-      setDocument,
-      uploadDocument,
-      setDocumentUploadResponse,
-      setPredictionShape,
-    ],
-  )
+      // setPredictionField([])
+      setDocumentUploadResponse(undefined)
+    }
+  }, [documentUploadStatus])
+
+  const handleDocumentUpload = (file: File) => {
+    setDocument(file)
+    // uploadDocument(file)
+  }
 
   const handleGetPrediction = () => {
-    if (documentUploadSuccess) {
+    if (canPrediction) {
       setDocumentUploadResponse(documentUploadResponse)
     }
   }
+  console.log('document interface re-render')
 
-  console.log('interface re-rendered')
   return (
     <Box sx={{ height: '100%' }}>
       <DocumentStatus
@@ -108,7 +119,7 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
                 >
                   Upload document
                 </Button>
-                {documentUploadSuccess && (
+                {canPrediction && (
                   <Button
                     onClick={handleGetPrediction}
                     variant="contained"

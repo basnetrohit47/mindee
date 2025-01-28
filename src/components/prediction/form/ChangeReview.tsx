@@ -34,7 +34,7 @@ export const ChangeReview = ({ handleClose, changeLog }: Props) => {
             Confirm Update
           </Typography>
 
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Box id="modal-modal-description" sx={{ mt: 2 }}>
             {getChangeValues.length > 0 ? (
               <div>
                 {getChangeValues.map((item) => (
@@ -71,7 +71,7 @@ export const ChangeReview = ({ handleClose, changeLog }: Props) => {
                 <Typography>No updates Found</Typography>
               </Box>
             )}
-          </Typography>
+          </Box>
         </Box>
         <Box>
           {getChangeValues.length > 0 ? (

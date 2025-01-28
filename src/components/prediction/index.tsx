@@ -15,7 +15,6 @@ export const PredictionInterface = ({ inputRefs }: Props) => {
 
   return (
     <>
-      <Typography>{getDocumentResponse?.job.id}</Typography>
       {getDocumentResponse ? (
         <PredictionComponent
           jobId={getDocumentResponse.job.id}

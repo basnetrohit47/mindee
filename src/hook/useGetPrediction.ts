@@ -15,6 +15,6 @@ export const useGetPrediction = () => {
 export const useGetPredictions = (params: string) => {
     return useQuery({
         queryFn: () => service.getPrediction(params),
-        queryKey: ['prediction']
+        queryKey: ['prediction', params]
     })
 }

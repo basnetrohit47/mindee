@@ -7,7 +7,6 @@ interface Props {
 }
 export const DocumentStatus = React.memo(
   ({ documentStatus, documentError }: Props) => {
-    console.log('document re-rendered')
     return (
       <Box sx={{ textAlign: 'left' }}>
         {documentStatus === 'pending' && (
