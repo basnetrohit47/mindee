@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Tab, Tabs } from '@mui/material'
 import { useAtom } from 'jotai'
 
@@ -8,23 +8,19 @@ import {
   predictionFields,
   predictionShapes,
 } from '../../store/prediction.store'
+import { createUpdatedShapes } from '../../utils/creatUpdateShapes'
 import { getDocumentPrediction } from '../../utils/documentCordination'
 import DocumentUpdateForm from './form/DocumentUpdateForm'
-import { PredictionResponse } from './form/PredictionResponse'
-import { PredictionStatus } from './status/PredictionStatus'
+import { PredictionResponse } from './PredictionResponse'
+import { PredictionStatus } from './PredictionStatus'
 
 interface Props {
   jobId: string
   inputRefs: React.MutableRefObject<{
     [key: number]: HTMLInputElement | HTMLDivElement | null
   }>
-  handleFieldHover: (shape: CustomeAnnotationShape) => void
 }
-export const PredictionInterface = ({
-  jobId,
-  inputRefs,
-  handleFieldHover,
-}: Props) => {
+export const PredictionComponent = ({ jobId, inputRefs }: Props) => {
   const {
     data: predictionResponse,
     error: predictionError,
@@ -54,6 +50,15 @@ export const PredictionInterface = ({
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue)
   }
+
+  const handleFieldHover = useCallback(
+    (hoveredShape: CustomeAnnotationShape) => {
+      setPredictionShape((prevShapes) =>
+        createUpdatedShapes(prevShapes, hoveredShape.id),
+      )
+    },
+    [setPredictionShape], // Dependency for the callback
+  )
 
   return (
     <>

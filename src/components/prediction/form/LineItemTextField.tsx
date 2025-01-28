@@ -59,7 +59,7 @@ export const LineItemTextField = ({
         }}
         id={`outlined-basic-${field.id}`}
         variant="outlined"
-        value={value}
+        value={value || ''}
         label={itemName}
         multiline
         onChange={(e) => setValue(e.target.value)}

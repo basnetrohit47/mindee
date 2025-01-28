@@ -9,7 +9,7 @@ import { useAddDocument } from '../../hook/useAddDocument'
 import { documentResponse } from '../../store/document.store'
 import { predictionShapes } from '../../store/prediction.store'
 import AnnotationPlaceholder from './AnnotationPlaceholder'
-import { DocumentStatus } from './status/DocumentStatus'
+import { DocumentStatus } from './DocumentStatus'
 
 interface Props {
   onShapeHover: (shape: CustomeAnnotationShape) => void
@@ -17,7 +17,7 @@ interface Props {
 const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
   const [document, setDocument] = useState<File | null>(null)
   const [, setDocumentUploadResponse] = useAtom(documentResponse)
-  const [getPredictionShape] = useAtom(predictionShapes)
+  const [getPredictionShape, setPredictionShape] = useAtom(predictionShapes)
 
   const {
     mutate: uploadDocument,
@@ -30,9 +30,16 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
   const handleDocumentUpload = useCallback(
     (file: File) => {
       setDocument(file)
+      setDocumentUploadResponse(undefined)
+      setPredictionShape([])
       uploadDocument(file)
     },
-    [setDocument, uploadDocument],
+    [
+      setDocument,
+      uploadDocument,
+      setDocumentUploadResponse,
+      setPredictionShape,
+    ],
   )
 
   const handleGetPrediction = () => {

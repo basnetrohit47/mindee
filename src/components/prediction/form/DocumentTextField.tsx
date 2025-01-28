@@ -95,7 +95,7 @@ export const DocumentTextField = ({
           }}
           id={`outlined-basic-${field.id}`}
           variant="outlined"
-          value={value}
+          value={value || ''}
           label={field.name}
           multiline
           onMouseOver={() => handleFieldHover(field)}

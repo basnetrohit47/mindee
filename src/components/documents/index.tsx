@@ -1,16 +1,11 @@
 import { useCallback, useRef } from 'react'
-import { Box, Typography } from '@mui/material'
-import { useAtom } from 'jotai'
+import { Box } from '@mui/material'
 
 import { CustomeAnnotationShape } from '../../common/types'
-import { documentResponse } from '../../store/document.store'
-import { predictionShapes } from '../../store/prediction.store'
-import { createUpdatedShapes } from '../../utils/creatUpdateShapes'
+import { PredictionInterface } from '../prediction'
 import DocumentInterface from './DocumentInterface'
-import { PredictionInterface } from './PredictionInterface'
 
 const DocumentView = () => {
-  const [getDocumentResponse] = useAtom(documentResponse)
   const inputRefs = useRef<{
     [key: number]: HTMLInputElement | HTMLDivElement | null
   }>({})
@@ -27,17 +22,7 @@ const DocumentView = () => {
     }
   }, [])
 
-  const [, setPredictionShape] = useAtom(predictionShapes)
-
-  const handleFieldHover = useCallback(
-    (hoveredShape: CustomeAnnotationShape) => {
-      setPredictionShape((prevShapes) =>
-        createUpdatedShapes(prevShapes, hoveredShape.id),
-      )
-    },
-    [setPredictionShape], // Dependency for the callback
-  )
-
+  console.log('main index redering')
   return (
     <>
       <Box sx={{ height: '80vh', margin: '1rem', maxWidth: '100%' }}>
@@ -68,17 +53,7 @@ const DocumentView = () => {
               paddingTop: '1rem',
             }}
           >
-            {getDocumentResponse ? (
-              <PredictionInterface
-                jobId={getDocumentResponse.job.id}
-                inputRefs={inputRefs}
-                handleFieldHover={handleFieldHover}
-              />
-            ) : (
-              <Box display={'flex'} alignItems={'center'} height={'100%'}>
-                <Typography>Your extracted data will display here</Typography>
-              </Box>
-            )}
+            <PredictionInterface inputRefs={inputRefs} />
           </Box>
         </Box>
       </Box>
