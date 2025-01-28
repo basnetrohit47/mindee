@@ -69,7 +69,6 @@ export const PredictionInterface = ({
           {tabValue === 0 && (
             <DocumentUpdateForm
               handleFieldHover={handleFieldHover}
-              DocumentFields={DocumentFields}
               inputRefs={inputRefs}
             />
           )}

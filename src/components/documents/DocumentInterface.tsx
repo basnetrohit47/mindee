@@ -58,7 +58,6 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
               {document ? (
                 <AnnotationViewer
                   onShapeMouseEnter={onShapeHover}
-                  // onShapeMouseLeave={onShapeLave}
                   data={{
                     image: URL.createObjectURL(document),
                     shapes: getPredictionShape,

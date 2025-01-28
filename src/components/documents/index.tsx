@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import { useAtom } from 'jotai'
 
 import { CustomeAnnotationShape } from '../../common/types'
@@ -68,11 +68,11 @@ const DocumentView = () => {
               paddingTop: '1rem',
             }}
           >
-            <Typography>jobid:{getDocumentResponse?.job.id}</Typography>
             {getDocumentResponse && (
               <PredictionInterface
                 jobId={getDocumentResponse.job.id}
                 inputRefs={inputRefs}
+                handleFieldHover={handleFieldHover}
               />
             )}
           </Box>

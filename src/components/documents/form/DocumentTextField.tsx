@@ -8,7 +8,11 @@ import { LineItemTextField } from './LineItemTextField'
 interface Props {
   field: CustomeAnnotationShape
   handleFieldHover: (shape: CustomeAnnotationShape) => void
-
+  handleFieldChange: (
+    shape: CustomeAnnotationShape,
+    value: string,
+    listName?: string,
+  ) => void
   inputRefs: React.MutableRefObject<{
     [key: number]: HTMLInputElement | HTMLDivElement | null
   }>
@@ -17,6 +21,7 @@ interface Props {
 export const DocumentTextField = ({
   field,
   inputRefs,
+  handleFieldChange,
   handleFieldHover,
 }: Props) => {
   const [value, setValue] = useState(field.value)
@@ -24,7 +29,7 @@ export const DocumentTextField = ({
 
   useEffect(() => {
     if (debouncedValue) {
-      // handleFieldChange(field, value)
+      handleFieldChange(field, value)
     }
   }, [debouncedValue])
 
@@ -45,17 +50,20 @@ export const DocumentTextField = ({
               <LineItemTextField
                 field={field}
                 inputRefs={inputRefs}
+                handleFieldChange={handleFieldChange}
                 itemName="description"
                 itemValue={field.raw.description}
               />
               <LineItemTextField
                 field={field}
+                handleFieldChange={handleFieldChange}
                 inputRefs={inputRefs}
                 itemName="quantity"
                 itemValue={field.raw.quantity}
               />
               <LineItemTextField
                 field={field}
+                handleFieldChange={handleFieldChange}
                 inputRefs={inputRefs}
                 itemName="unit_price"
                 itemValue={field.raw.unit_price}
@@ -90,12 +98,11 @@ export const DocumentTextField = ({
           value={value}
           label={field.name}
           multiline
-          onMouseOver={handleFieldHover}
+          onMouseOver={() => handleFieldHover(field)}
           onChange={(e) => setValue(e.target.value)}
           inputRef={(el) => {
             inputRefs.current[field.id] = el
           }}
-          // inputRef={(el) => el && addRef(1, el)} // Store the reference to the input element in the atom
         />
       )}
     </Box>

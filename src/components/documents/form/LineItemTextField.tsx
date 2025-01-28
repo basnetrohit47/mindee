@@ -11,6 +11,11 @@ interface Props {
   inputRefs: React.MutableRefObject<{
     [key: number]: HTMLInputElement | HTMLDivElement | null
   }>
+  handleFieldChange: (
+    shape: CustomeAnnotationShape,
+    value: string,
+    listName?: string,
+  ) => void
 }
 
 export const LineItemTextField = ({
@@ -18,13 +23,14 @@ export const LineItemTextField = ({
   inputRefs,
   itemName,
   itemValue,
+  handleFieldChange,
 }: Props) => {
   const [value, setValue] = useState(itemValue)
   const debouncedValue = useDebounce(value)
 
   useEffect(() => {
     if (debouncedValue) {
-      // handleFieldChange(field, value, itemName)
+      handleFieldChange(field, value, itemName)
     }
   }, [debouncedValue])
 
@@ -60,7 +66,6 @@ export const LineItemTextField = ({
         inputRef={(el) => {
           inputRefs.current[field.id] = el
         }}
-        // inputRef={(el) => el && addRef(1, el)} // Store the reference to the input element in the atom
       />
     </Box>
   )
