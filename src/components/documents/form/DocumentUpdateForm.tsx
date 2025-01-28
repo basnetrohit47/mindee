@@ -25,8 +25,6 @@ const DocumentUpdateForm = ({
   handleFieldChange,
   inputRefs,
 }: Props) => {
-  console.log('rendinf update')
-
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
   const showReview = () => {

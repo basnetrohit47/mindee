@@ -9,6 +9,7 @@ import { useGetPrediction } from './useGetPrediction'
 export const useDocumentProcessing = () => {
   const [document, setDocument] = useState<File | null>(null)
   const [shapes, setShapes] = useState<CustomeAnnotationShape[]>([])
+  const [fields, setFields] = useState<CustomeAnnotationShape[]>([])
   const inputRefs = useRef<{
     [key: number]: HTMLInputElement | HTMLDivElement | null
   }>({})
@@ -29,41 +30,38 @@ export const useDocumentProcessing = () => {
   } = useGetPrediction()
 
   // Document Upload Handler
-  const handleDocumentUpload = useCallback((file: File) => {
-    setDocument(file)
-    uploadDocument(file)
-  }, [])
+  const handleDocumentUpload = useCallback(
+    (file: File) => {
+      setDocument(file)
+      uploadDocument(file)
+    },
+    [setDocument, uploadDocument],
+  )
 
   // Prediction Request Handler
-  const getPrediction = () => {
+  const getPrediction = useCallback(() => {
     if (documentUploadResponse) {
       getPredict(documentUploadResponse.job.id)
     }
-  }
-  const handleFieldChange = (
-    item: CustomeAnnotationShape,
-    newValue: string,
-    listName?: string,
-  ) => {
-    const updatedFields = shapes.map((field) =>
-      field.id === item.id
-        ? {
-            ...field,
-            value: newValue,
-            ChangedlistName: listName,
-            isChanged: field.original !== newValue,
-          }
-        : field,
-    )
-    // const ssh = shapes.map((field) => {
+  }, [documentUploadResponse, getPredict])
 
-    //   return field.id === item.id
-    //     ? { ...field, value: newValue, isChanged: field.original !== newValue }
-    //     : field
-    // })
+  const handleFieldChange = useCallback(
+    (item: CustomeAnnotationShape, newValue: string, listName?: string) => {
+      const updatedFields = fields.map((field) =>
+        field.id === item.id
+          ? {
+              ...field,
+              value: newValue,
+              ChangedlistName: listName,
+              isChanged: field.original !== newValue,
+            }
+          : field,
+      )
 
-    setShapes(updatedFields)
-  }
+      setFields(updatedFields)
+    },
+    [fields],
+  )
   // Prediction Response Update
   useEffect(() => {
     if (predictionResponse) {
@@ -71,6 +69,7 @@ export const useDocumentProcessing = () => {
         predictionResponse.document?.inference.prediction,
       )
       setShapes(shapes)
+      setFields(JSON.parse(JSON.stringify(shapes))) // Deep clone using JSON methods
     }
   }, [predictionResponse])
 
@@ -130,5 +129,6 @@ export const useDocumentProcessing = () => {
     predictionStatus,
     documentStatus,
     onShapeLave,
+    fields,
   }
 }

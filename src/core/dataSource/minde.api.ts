@@ -2,6 +2,7 @@ import MindeeInterface from "../entities/repositories/mindee.interface";
 import { apiClient } from "./apiClient";
 import { API_ENDPOINTS } from "./apiEndpoints";
 
+
 export default class MindeDataSource extends MindeeInterface {
 
     public async uploadDocument(params: File): Promise<object | undefined> {

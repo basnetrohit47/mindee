@@ -1,12 +1,9 @@
-import { useState } from 'react'
-import { Box, Tab, Tabs } from '@mui/material'
+import { Box } from '@mui/material'
 
 import { useDocumentProcessing } from '../../hook/useDocumentProcessing'
 import DocumentInterface from './DocumentInterface'
-import DocumentUpdateForm from './form/DocumentUpdateForm'
-import { PredictionResponse } from './form/PredictionResponse'
+import { PredictionInterface } from './PredictionInterface'
 import { DocumentStatus } from './status/DocumentStatus'
-import { PredictionStatus } from './status/PredictionStatus'
 
 const DocumentView = () => {
   const {
@@ -26,11 +23,8 @@ const DocumentView = () => {
     handleFieldChange,
     predictionStatus,
     onShapeLave,
+    fields,
   } = useDocumentProcessing()
-  const [tabValue, setTabValue] = useState(0)
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setTabValue(newValue)
-  }
 
   return (
     <>
@@ -39,6 +33,7 @@ const DocumentView = () => {
           documentStatus={documentStatus}
           documentError={documentError}
         />
+
         <Box
           display="flex"
           sx={{ width: '100%', height: '80vh' }}
@@ -74,36 +69,16 @@ const DocumentView = () => {
               paddingTop: '1rem',
             }}
           >
-            {shapes.length ? (
-              <>
-                <Tabs value={tabValue} onChange={handleChange}>
-                  <Tab label="Extracted data" />
-                  <Tab
-                    sx={{ textTransform: 'none' }}
-                    label={`API RESPONSE (${predictionResponse?.document?.inference.processing_time?.toFixed(2)} s)`}
-                  />
-                </Tabs>
-                {tabValue === 0 && (
-                  <DocumentUpdateForm
-                    DocumentFields={shapes}
-                    handleMouseHover={handleFieldHover}
-                    handleMouseLeave={handleMouseLeave}
-                    inputRefs={inputRefs}
-                    handleFieldChange={handleFieldChange}
-                  />
-                )}
-                {tabValue === 1 && (
-                  <PredictionResponse
-                    predictionResponse={predictionResponse?.document?.inference}
-                  />
-                )}
-              </>
-            ) : (
-              <PredictionStatus
-                predictionStatus={predictionStatus}
-                predictionError={predictionError}
-              />
-            )}
+            <PredictionInterface
+              DocumentFields={fields}
+              handleMouseHover={handleFieldHover}
+              inputRefs={inputRefs}
+              handleMouseLeave={handleMouseLeave}
+              handleFieldChange={handleFieldChange}
+              predictionResponse={predictionResponse}
+              predictionStatus={predictionStatus}
+              predictionError={predictionError}
+            />
           </Box>
         </Box>
       </Box>
