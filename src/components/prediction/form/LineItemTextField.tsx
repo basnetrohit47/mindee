@@ -1,21 +1,15 @@
-import { useEffect, useState } from 'react'
 import { Box, TextField } from '@mui/material'
 
 import { CustomeAnnotationShape } from '../../../common/types'
-import { useDebounce } from '../../../hook/useDebounce'
+import { useFieldUpdate } from '../hook/useFieldUpdate'
 
 interface Props {
-  itemName: string
+  itemName?: string
   itemValue: string
   field: CustomeAnnotationShape
   inputRefs: React.MutableRefObject<{
     [key: number]: HTMLInputElement | HTMLDivElement | null
   }>
-  handleFieldChange: (
-    shape: CustomeAnnotationShape,
-    value: string,
-    listName?: string,
-  ) => void
 }
 
 export const LineItemTextField = ({
@@ -23,16 +17,12 @@ export const LineItemTextField = ({
   inputRefs,
   itemName,
   itemValue,
-  handleFieldChange,
 }: Props) => {
-  const [value, setValue] = useState(itemValue)
-  const debouncedValue = useDebounce(value)
-
-  useEffect(() => {
-    if (debouncedValue) {
-      handleFieldChange(field, value, itemName)
-    }
-  }, [debouncedValue])
+  const { value, setValue, handleFieldHover } = useFieldUpdate(
+    field,
+    itemValue,
+    itemName,
+  )
 
   return (
     <Box width={'100%'}>
@@ -62,6 +52,7 @@ export const LineItemTextField = ({
         value={value || ''}
         label={itemName}
         multiline
+        onMouseOver={() => handleFieldHover(field)}
         onChange={(e) => setValue(e.target.value)}
         inputRef={(el) => {
           inputRefs.current[field.id] = el

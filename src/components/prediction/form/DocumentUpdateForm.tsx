@@ -11,33 +11,10 @@ interface Props {
   inputRefs: React.MutableRefObject<{
     [key: number]: HTMLInputElement | HTMLDivElement | null
   }>
-  handleFieldHover: (shape: CustomeAnnotationShape) => void
 }
-const DocumentUpdateForm = ({ inputRefs, handleFieldHover }: Props) => {
+const DocumentUpdateForm = ({ inputRefs }: Props) => {
   const [open, setOpen] = useState(false)
-  const handleClose = () => setOpen(false)
-  const showReview = () => {
-    setOpen(true)
-  }
-
-  const [DocumentFields, setPredictionField] = useAtom(predictionFields)
-  const handleFieldChange = (
-    item: CustomeAnnotationShape,
-    newValue: string,
-    listName?: string,
-  ) => {
-    const updatedFields = DocumentFields.map((field) =>
-      field.id === item.id
-        ? {
-            ...field,
-            value: newValue,
-            ChangedlistName: listName,
-            isChanged: field.original !== newValue,
-          }
-        : field,
-    )
-    setPredictionField(updatedFields)
-  }
+  const [DocumentFields] = useAtom(predictionFields)
 
   return (
     <>
@@ -47,7 +24,7 @@ const DocumentUpdateForm = ({ inputRefs, handleFieldHover }: Props) => {
             <Button
               variant="contained"
               sx={{ marginLeft: 'auto' }}
-              onClick={showReview}
+              onClick={() => setOpen(true)}
             >
               Update
             </Button>
@@ -56,8 +33,6 @@ const DocumentUpdateForm = ({ inputRefs, handleFieldHover }: Props) => {
         <Box sx={{ height: '60vh', overflow: 'scroll', paddingTop: '1rem' }}>
           {DocumentFields.map((field: CustomeAnnotationShape) => (
             <DocumentTextField
-              handleFieldHover={handleFieldHover}
-              handleFieldChange={handleFieldChange}
               key={field.id}
               field={field}
               inputRefs={inputRefs}
@@ -65,7 +40,10 @@ const DocumentUpdateForm = ({ inputRefs, handleFieldHover }: Props) => {
           ))}
         </Box>
         {open && (
-          <ChangeReview handleClose={handleClose} changeLog={DocumentFields} />
+          <ChangeReview
+            handleClose={() => setOpen(false)}
+            changeLog={DocumentFields}
+          />
         )}
       </Box>
     </>

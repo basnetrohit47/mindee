@@ -20,7 +20,6 @@ const DocumentView = () => {
       }
     }
   }, [])
-
   return (
     <>
       <Box sx={{ height: '80vh', margin: '1rem', maxWidth: '100%' }}>

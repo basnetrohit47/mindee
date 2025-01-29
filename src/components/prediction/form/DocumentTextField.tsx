@@ -1,37 +1,17 @@
-import { useEffect, useState } from 'react'
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 import { CustomeAnnotationShape } from '../../../common/types'
-import { useDebounce } from '../../../hook/useDebounce'
 import { LineItemTextField } from './LineItemTextField'
 
 interface Props {
   field: CustomeAnnotationShape
-  handleFieldHover: (shape: CustomeAnnotationShape) => void
-  handleFieldChange: (
-    shape: CustomeAnnotationShape,
-    value: string,
-    listName?: string,
-  ) => void
   inputRefs: React.MutableRefObject<{
     [key: number]: HTMLInputElement | HTMLDivElement | null
   }>
 }
 
-export const DocumentTextField = ({
-  field,
-  inputRefs,
-  handleFieldChange,
-  handleFieldHover,
-}: Props) => {
-  const [value, setValue] = useState(field.value)
-  const debouncedValue = useDebounce(value)
-
-  useEffect(() => {
-    if (debouncedValue) {
-      handleFieldChange(field, value)
-    }
-  }, [debouncedValue])
+export const DocumentTextField = ({ field, inputRefs }: Props) => {
+  const lineItems = ['description', 'quantity', 'unit_price']
 
   return (
     <Box
@@ -46,63 +26,28 @@ export const DocumentTextField = ({
             Line Items
           </Typography>
           <Box sx={{ backgroundColor: '#d8d8d882' }}>
-            <div style={{ padding: '1rem 0rem' }}>
-              <LineItemTextField
-                field={field}
-                inputRefs={inputRefs}
-                handleFieldChange={handleFieldChange}
-                itemName="description"
-                itemValue={field.raw.description}
-              />
-              <LineItemTextField
-                field={field}
-                handleFieldChange={handleFieldChange}
-                inputRefs={inputRefs}
-                itemName="quantity"
-                itemValue={field.raw.quantity}
-              />
-              <LineItemTextField
-                field={field}
-                handleFieldChange={handleFieldChange}
-                inputRefs={inputRefs}
-                itemName="unit_price"
-                itemValue={field.raw.unit_price}
-              />
+            <div
+              style={{ padding: '1rem 0rem' }}
+              // ref={(el) => {
+              //   inputRefs.current[field.id] = el
+              // }}
+            >
+              {lineItems.map((line) => (
+                <LineItemTextField
+                  field={field}
+                  inputRefs={inputRefs}
+                  itemName={line}
+                  itemValue={field.raw[line]}
+                />
+              ))}
             </div>
           </Box>
         </Box>
       ) : (
-        <TextField
-          FormHelperTextProps={{
-            sx: { textAlign: 'right', width: '100%' }, // Styles for the helper text
-          }}
-          helperText={`Confidence Score: ${field.confidence}`}
-          key={field.id}
-          sx={{
-            width: '100%',
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'grey', // Default border color
-                borderWidth: 2, // Optional: make border more prominent
-              },
-              '&:hover fieldset': {
-                borderColor: field.colorSet?.stroke, // Hover border color
-              },
-              '&.Mui-focused fieldset': {
-                borderColor: field.colorSet?.stroke, // Focused border color
-              },
-            },
-          }}
-          id={`outlined-basic-${field.id}`}
-          variant="outlined"
-          value={value || ''}
-          label={field.name}
-          multiline
-          onMouseOver={() => handleFieldHover(field)}
-          onChange={(e) => setValue(e.target.value)}
-          inputRef={(el) => {
-            inputRefs.current[field.id] = el
-          }}
+        <LineItemTextField
+          field={field}
+          inputRefs={inputRefs}
+          itemValue={field.value}
         />
       )}
     </Box>
