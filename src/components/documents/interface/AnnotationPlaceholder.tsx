@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material'
 import makeStyles from '@mui/styles/makeStyles'
 
-import placeholder from '../../assets/image-placeholder.svg'
+import placeholder from '../../../assets/image-placeholder.svg'
 
 const useStyles = makeStyles({
   placeholder: {

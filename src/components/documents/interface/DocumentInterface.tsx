@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Box, Button, Stack } from '@mui/material'
 import Dropzone from 'react-dropzone'
-import { AnnotationViewer } from 'react-mindee-js'
 
-import { CustomeAnnotationShape } from '../../common/types'
+import { CustomeAnnotationShape } from '../../../common/types'
+import { useDocumentData } from '../hook/useDocumentData'
 import AnnotationPlaceholder from './AnnotationPlaceholder'
 import { DocumentStatus } from './DocumentStatus'
-import { useDocumentData } from './hook/useDocumentData'
+
+const LazyAnnotationViewer = lazy(() =>
+  import('react-mindee-js').then((module) => ({
+    default: module.AnnotationViewer,
+  })),
+)
 
 interface Props {
   onShapeHover: (shape: CustomeAnnotationShape) => void
@@ -42,19 +47,21 @@ const DocumentInterface = React.memo(({ onShapeHover }: Props) => {
                 }}
               >
                 {document ? (
-                  <AnnotationViewer
-                    onShapeMouseEnter={onShapeHover}
-                    data={{
-                      image: URL.createObjectURL(document),
-                      shapes: getPredictionShape,
-                    }}
-                    style={{
-                      height: '100%',
-                      width: '100%',
-                      borderRadius: 4,
-                      background: '#179a57',
-                    }}
-                  />
+                  <Suspense fallback={<div>....Loading</div>}>
+                    <LazyAnnotationViewer
+                      onShapeMouseEnter={onShapeHover}
+                      data={{
+                        image: URL.createObjectURL(document),
+                        shapes: getPredictionShape,
+                      }}
+                      style={{
+                        height: '100%',
+                        width: '100%',
+                        borderRadius: 4,
+                        background: '#179a57',
+                      }}
+                    />
+                  </Suspense>
                 ) : (
                   <Stack
                     sx={{ position: 'relative', flexGrow: 1 }}

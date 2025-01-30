@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 
 import { CustomeAnnotationShape } from '../../common/types'
 import { PredictionInterface } from '../prediction'
-import DocumentInterface from './DocumentInterface'
+import DocumentInterface from './interface/DocumentInterface'
 
 const DocumentView = () => {
   const inputRefs = useRef<{
